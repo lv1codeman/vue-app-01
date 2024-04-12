@@ -43,19 +43,6 @@
 export default {
   data() {
     return {
-      // dataFields: [
-      //   // { id: "id", field: "ID" },
-      //   { id: "college", field: "學院" },
-      //   { id: "collegeFullName", field: "學院全名" },
-      //   { id: "dept", field: "系所" },
-      //   { id: "deptFullName", field: "系所全名" },
-      //   { id: "agent", field: "系辦助理" },
-      //   { id: "agentExt", field: "系辦助理分機" },
-      //   { id: "agentEmail", field: "系辦助理email" },
-      //   { id: "curriAgent", field: "課務組承辦人" },
-      //   { id: "curriAgentExt", field: "課務組承辦人分機" },
-      //   { id: "curriAgentEmail", field: "課務組承辦人email" },
-      // ],
       dataFields: {
         college: "學院",
         collegeFullName: "學院全名",
