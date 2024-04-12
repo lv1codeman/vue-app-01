@@ -188,3 +188,28 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      id: "ID",
+      college: "學院",
+      collegeFullName: "學院全名",
+      dept: "系所",
+      deptFullName: "系所全名",
+      agent: "系辦助理",
+      agentExt: "系辦助理分機",
+      agentEmail: "系辦助理email",
+      curriAgent: "課務組承辦人",
+      curriAgentExt: "課務組承辦人分機",
+      curriAgentEmail: "課務組承辦人email",
+    };
+  },
+  methods: {
+    btnSubmitClick() {
+      alert("submit button clicked.");
+    },
+  },
+};
+</script>
