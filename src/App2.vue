@@ -1,8 +1,14 @@
 <template>
-  <div id="outer" class="my-20 flex items-center justify-center">
+  <div id="outer" class="h-64 bg-gray-200 flex items-center justify-center">
     <!-- 外部 div，背景顏色為灰色，高度為 64px，居中顯示 -->
-    <div id="inner" class="w-full sm:w-full md:w-3/5 lg:w-2/5 text-center">
+    <div id="inner" class="w-1/2 bg-red-500">
       <!-- 內部 div，背景顏色為紅色，寬度佔父元素的一半 -->
+      Inner Content
+    </div>
+  </div>
+
+  <div class="container mx-auto mt-20 flex justify-center">
+    <div class="w-full max-w-3xl">
       <form class="w-full mx-auto bg-white p-8 rounded form-shadow">
         <h2 class="text-2xl font-semibold mb-6">登記資料</h2>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">

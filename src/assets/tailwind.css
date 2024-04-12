@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-shadow{
+  box-shadow: 1px 1px 22px 5px rgb(164 194 253 / 66%);
+}
