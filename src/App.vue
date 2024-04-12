@@ -1,4 +1,4 @@
 <template>
   <h1>Hello World~</h1>
-  <p class="text-4xl">publish success</p>
+  <p>publish success</p>
 </template>
