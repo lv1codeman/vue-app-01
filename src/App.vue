@@ -1,7 +1,7 @@
 <template>
   <div id="outer" class="my-20 flex items-center justify-center">
     <!-- 外部 div，背景顏色為灰色，高度為 64px，居中顯示 -->
-    <div id="inner" class="w-11/12 sm:w-4/5 md:w-3/5 lg:w-2/5 text-center">
+    <div id="inner" class="w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/3 text-center">
       <!-- 內部 div，背景顏色為紅色，寬度佔父元素的一半 -->
 
       <form class="w-full mx-auto bg-white p-8 rounded form-shadow">
@@ -79,7 +79,7 @@
 <script>
 import Swal from "sweetalert2";
 
-import users from "./assets/js/myjs";
+import users from "./assets/js/getAgents";
 
 export default {
   created() {},
