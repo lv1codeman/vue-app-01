@@ -21,6 +21,7 @@
             :id="key"
             type="text"
             :placeholder="'請輸入' + value"
+            ref="inputs"
           />
         </div>
 
@@ -33,6 +34,13 @@
           >
             登記
           </button>
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+            @click="clearInputs"
+          >
+            清除
+          </button>
         </div>
       </form>
     </div>
@@ -40,7 +48,9 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
+  created() {},
   data() {
     return {
       dataFields: {
@@ -59,8 +69,41 @@ export default {
   },
   computed: {},
   methods: {
+    getInputs() {
+      const inputdata = [];
+      console.log(this.$refs.inputs);
+      console.log(typeof this.$refs.inputs[0].value);
+      for (let i = 0; i < this.$refs.inputs.length; i++) {
+        console.log(this.$refs.inputs[i].value);
+        inputdata.push(this.$refs.inputs[i].value);
+      }
+
+      return inputdata;
+    },
+    clearInputs() {
+      for (let i = 0; i < this.$refs.inputs.length; i++) {
+        this.$refs.inputs[i].value = "";
+      }
+    },
+
     btnSubmitClick() {
-      alert("submit button clicked.");
+      const res = this.getInputs();
+      Swal.fire({
+        title: "確認上傳資料",
+        text: res,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "送出",
+        cancelButtonText: "返回",
+        denyButtonText: `取消`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire("資料已送出", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("資料尚未送出", "", "info");
+        }
+      });
     },
   },
 };
