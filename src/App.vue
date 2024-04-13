@@ -86,14 +86,16 @@
 <script>
 import Swal from "sweetalert2";
 
-import users from "./assets/js/getAgents";
+// import users from "./assets/js/getAgents";
+import { gogo } from "./assets/js/getAgents";
 import { addAgent } from "./assets/js/setAgent";
 
 import firebaseConfig from "./assets/js/getFirebaseConfig";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 export default {
   created() {},
   data() {
@@ -125,29 +127,13 @@ export default {
       addAgent();
     },
     async show() {
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-      const users = [];
-
-      const querySnapshot = await getDocs(collection(db, "agents"));
-      querySnapshot.forEach((doc) => {
-        const obj = {
-          id: doc.id,
-          dept: doc.data().dept,
-          college: doc.data().college,
-          collegeFullName: doc.data().collegeFullName,
-          dept: doc.data().dept,
-          deptFullName: doc.data().deptFullName,
-          agent: doc.data().agent,
-          agentExt: doc.data().agentExt,
-          agentEmail: doc.data().agentEmail,
-          curriAgent: doc.data().curriAgent,
-          curriAgentExt: doc.data().curriAgentExt,
-          curriAgentEmail: doc.data().curriAgentEmail,
-        };
-        users.push(obj);
-      });
-      console.log(users);
+      gogo(db)
+        .then((users) => {
+          console.log("取得使用者資料成功：", users);
+        })
+        .catch((error) => {
+          console.error("取得使用者資料失敗：", error);
+        });
     },
     getInputs() {
       const inputdata = [];
