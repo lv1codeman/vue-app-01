@@ -59,9 +59,16 @@
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
-            @click="show"
+            @click="add"
           >
             登記
+          </button>
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+            @click="show"
+          >
+            show in console
           </button>
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -80,6 +87,12 @@
 import Swal from "sweetalert2";
 
 import users from "./assets/js/getAgents";
+import { addAgent } from "./assets/js/setAgent";
+
+import firebaseConfig from "./assets/js/getFirebaseConfig";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default {
   created() {},
@@ -108,7 +121,32 @@ export default {
   },
   computed: {},
   methods: {
-    show() {
+    add() {
+      addAgent();
+    },
+    async show() {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const users = [];
+
+      const querySnapshot = await getDocs(collection(db, "agents"));
+      querySnapshot.forEach((doc) => {
+        const obj = {
+          id: doc.id,
+          dept: doc.data().dept,
+          college: doc.data().college,
+          collegeFullName: doc.data().collegeFullName,
+          dept: doc.data().dept,
+          deptFullName: doc.data().deptFullName,
+          agent: doc.data().agent,
+          agentExt: doc.data().agentExt,
+          agentEmail: doc.data().agentEmail,
+          curriAgent: doc.data().curriAgent,
+          curriAgentExt: doc.data().curriAgentExt,
+          curriAgentEmail: doc.data().curriAgentEmail,
+        };
+        users.push(obj);
+      });
       console.log(users);
     },
     getInputs() {
