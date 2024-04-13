@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 
-export async function gogo(db) {
+export async function getAllAgents(db) {
   return new Promise((resolve, reject) => {
     const users = [];
 

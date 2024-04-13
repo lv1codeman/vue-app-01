@@ -1,9 +1,6 @@
 <template>
   <div id="outer" class="my-20 flex items-center justify-center">
-    <!-- 外部 div，背景顏色為灰色，高度為 64px，居中顯示 -->
     <div id="inner" class="w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/3 text-center">
-      <!-- 內部 div，背景顏色為紅色，寬度佔父元素的一半 -->
-
       <form class="w-full mx-auto bg-white p-8 rounded form-shadow">
         <h2 class="text-2xl font-semibold mb-6">登記資料</h2>
         <div
@@ -69,7 +66,7 @@
             type="button"
             @click="show"
           >
-            show in console
+            show agents in console
           </button>
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -87,8 +84,7 @@
 <script>
 import Swal from "sweetalert2";
 
-// import users from "./assets/js/getAgents";
-import { gogo } from "./assets/js/getAgents";
+import { getAllAgents } from "./assets/js/getAgents";
 import { addAgent } from "./assets/js/setAgent";
 
 import firebaseConfig from "./assets/js/getFirebaseConfig";
@@ -162,10 +158,12 @@ export default {
         this.curriAgentOptions[this.selectedOption].email;
     },
     async show() {
-      gogo(db)
+      getAllAgents(db)
         .then((users) => {
           console.log("取得使用者資料成功：", users);
-          console.log("取得使用者資料成功：", users.length);
+          const userNum = users.length;
+          const msg = `目前資料庫中共有${userNum}位使用者。`;
+          console.log(msg);
         })
         .catch((error) => {
           console.error("取得使用者資料失敗：", error);
@@ -173,14 +171,10 @@ export default {
     },
     getInputs() {
       const inputdata = [];
-      // console.log(this.$refs.inputs);
-      // console.log(typeof this.$refs.inputs[0].value);
       for (let i = 0; i < this.$refs.inputs.length; i++) {
-        // console.log(this.$refs.inputs[i]);
         console.log(this.$refs.inputs[i].value);
         inputdata.push(this.$refs.inputs[i].value);
       }
-
       return inputdata;
     },
     clearInputs() {
@@ -217,11 +211,11 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           // 取得目前資料庫的user數，將其+1作為id給新的user
-          gogo(db)
+          getAllAgents(db)
             .then((users) => {
               console.log("取得使用者資料成功：", users);
               console.log("取得使用者資料成功：", users.length.toString());
-              addAgent(obj, (users.length + 1).toString());
+              addAgent(db, obj, (users.length + 1).toString());
             })
             .catch((error) => {
               console.error("取得使用者資料失敗：", error);
