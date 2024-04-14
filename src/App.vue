@@ -45,7 +45,13 @@
               type="text"
               :placeholder="'請輸入' + value"
               ref="inputs"
+              @input="validateInput($event, key)"
             />
+            <span
+              class="text-red-500 text-sm italic whitespace-nowrap"
+              v-if="showValidation[key] && validationResults[key]"
+              >{{ validationResults[key] }}</span
+            >
             <div
               class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
             ></div>
@@ -71,7 +77,7 @@
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
-            @click="clearInputs"
+            @click="btnClear"
           >
             清除
           </button>
@@ -104,6 +110,19 @@ export default {
   },
   data() {
     return {
+      showValidation: {}, // Keep track of input touched status
+      validationResults: {
+        college: "尚未輸入",
+        collegeFullName: "尚未輸入",
+        dept: "尚未輸入",
+        deptFullName: "尚未輸入",
+        agent: "尚未輸入",
+        agentExt: "尚未輸入",
+        agentEmail: "尚未輸入",
+        curriAgent: "尚未輸入",
+        curriAgentExt: "尚未輸入",
+        curriAgentEmail: "尚未輸入",
+      },
       dataFields: {
         college: "學院",
         collegeFullName: "學院全名",
@@ -151,6 +170,35 @@ export default {
   },
   computed: {},
   methods: {
+    validateInput(event, key) {
+      // 如果這個input有輸入值才顯示validation
+      this.showValidation[key] = event.target.value === "" ? false : true;
+      // var str = key;
+      // console.log();
+      // const chineseRegex = /^[\u4E00-\u9FA5]+$/;
+
+      const chineseRegex = /\p{Unified_Ideograph}/u;
+
+      console.log(chineseRegex.test(event.target.value));
+
+      switch (key) {
+        case "college":
+          this.validationResults.college = "限輸入文字";
+          break;
+        case "collegeFullName":
+          this.validationResults.collegeFullName = "限輸入文字";
+        case "dept":
+          this.validationResults.dept = "限輸入文字";
+        case "deptFullName":
+          this.validationResults.deptFullName = "限輸入文字";
+        case "agent":
+          this.validationResults.agent = "限輸入文字";
+        case "agentExt":
+          this.validationResults.agentExt = "限輸入數字";
+        case "agentEmail":
+          this.validationResults.agentEmail = "需輸入email格式";
+      }
+    },
     curriAgentOnChange() {
       document.getElementById("curriAgentExt").value =
         this.curriAgentOptions[this.selectedOption].ext;
@@ -177,11 +225,14 @@ export default {
       }
       return inputdata;
     },
-    clearInputs() {
+    btnClear() {
       for (let i = 0; i < this.$refs.inputs.length; i++) {
         this.$refs.inputs[i].value = "";
       }
       this.selectedOption = "";
+      Object.keys(this.showValidation).forEach(
+        (v) => (this.showValidation[v] = false)
+      );
     },
 
     btnSubmitClick() {

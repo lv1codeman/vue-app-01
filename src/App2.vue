@@ -12,10 +12,7 @@
       <form class="w-full mx-auto bg-white p-8 rounded form-shadow">
         <h2 class="text-2xl font-semibold mb-6">登記資料</h2>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="id"
-          >
+          <label class="btnClear" for="id">
             <span class="mr-1">{{ id }}</span>
           </label>
           <input
@@ -26,10 +23,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="college"
-          >
+          <label class="btnClear" for="college">
             <span class="mr-1">{{ college }}</span>
           </label>
           <input
@@ -40,10 +34,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="collegeFullName"
-          >
+          <label class="btnClear" for="collegeFullName">
             <span class="mr-1">{{ collegeFullName }}</span>
           </label>
           <input
@@ -54,10 +45,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="dept"
-          >
+          <label class="btnClear" for="dept">
             <span class="mr-1">{{ dept }}</span>
           </label>
           <input
@@ -68,10 +56,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="deptFullName"
-          >
+          <label class="btnClear" for="deptFullName">
             <span class="mr-1">{{ deptFullName }}</span>
           </label>
           <input
@@ -82,10 +67,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="agent"
-          >
+          <label class="btnClear" for="agent">
             <span class="mr-1">{{ agent }}</span>
           </label>
           <input
@@ -96,10 +78,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="agentExt"
-          >
+          <label class="btnClear" for="agentExt">
             <span class="mr-1">{{ agentExt }}</span>
           </label>
           <input
@@ -110,10 +89,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="agentEmail"
-          >
+          <label class="btnClear" for="agentEmail">
             <span class="mr-1">{{ agentEmail }}</span>
           </label>
           <input
@@ -124,10 +100,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="curriAgent"
-          >
+          <label class="btnClear" for="curriAgent">
             <span class="mr-1">{{ curriAgent }}</span>
           </label>
           <input
@@ -138,10 +111,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="curriAgentExt"
-          >
+          <label class="btnClear" for="curriAgentExt">
             <span class="mr-1">{{ curriAgentExt }}</span>
           </label>
           <input
@@ -152,10 +122,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="agentEmail"
-          >
+          <label class="btnClear" for="agentEmail">
             <span class="mr-1">{{ agentEmail }}</span>
           </label>
           <input
@@ -166,10 +133,7 @@
           />
         </div>
         <div class="mb-4 flex flex-col md:flex-row md:items-center">
-          <label
-            class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-            for="curriAgentEmail"
-          >
+          <label class="btnClear" for="curriAgentEmail">
             <span class="mr-1">{{ curriAgentEmail }}</span>
           </label>
           <input
