@@ -20,7 +20,7 @@
             </label>
             <span
               class="text-red-500 text-sm italic mt-1"
-              v-if="showValidation[key] && validationResults[key]"
+              v-show="validations[key].isShow && !validations[key].isCorrect"
               >&nbsp;</span
             >
           </div>
@@ -53,8 +53,8 @@
               />
               <span
                 class="text-red-500 text-sm italic mt-1 text-left"
-                v-if="showValidation[key] && validationResults[key]"
-                >{{ validationResults[key] }}</span
+                v-show="validations[key].isShow && !validations[key].isCorrect"
+                >{{ validations[key].text }}</span
               >
             </template>
           </div>
@@ -125,6 +125,18 @@ export default {
   },
   data() {
     return {
+      validations: {
+        college: { text: "尚未輸入", isShow: false, isCorrect: false },
+        collegeFullName: { text: "尚未輸入", isShow: false, isCorrect: false },
+        dept: { text: "尚未輸入", isShow: false, isCorrect: false },
+        deptFullName: { text: "尚未輸入", isShow: false, isCorrect: false },
+        agent: { text: "尚未輸入", isShow: false, isCorrect: false },
+        agentExt: { text: "尚未輸入", isShow: false, isCorrect: false },
+        agentEmail: { text: "尚未輸入", isShow: false, isCorrect: false },
+        curriAgent: { text: "尚未輸入", isShow: false, isCorrect: false },
+        curriAgentExt: { text: "尚未輸入", isShow: false, isCorrect: false },
+        curriAgentEmail: { text: "尚未輸入", isShow: false, isCorrect: false },
+      },
       showValidation: {}, // Keep track of input touched status
       validationResults: {
         college: "尚未輸入",
@@ -187,31 +199,52 @@ export default {
   methods: {
     validateInput(event, key) {
       // 如果這個input有輸入值才顯示validation
-      this.showValidation[key] = event.target.value === "" ? false : true;
+      // this.showValidation[key] = event.target.value === "" ? false : true;
+      this.validations[key].isShow = event.target.value === "" ? false : true;
       // var str = key;
       // console.log();
-      // const chineseRegex = /^[\u4E00-\u9FA5]+$/;
+      const chineseRegex = /^[\u4E00-\u9FA5]+$/;
 
-      const chineseRegex = /\p{Unified_Ideograph}/u;
+      // const chineseRegex = /\p{Unified_Ideograph}/u;
 
       console.log(chineseRegex.test(event.target.value));
-
-      switch (key) {
-        case "college":
-          this.validationResults.college = "限輸入文字";
-          break;
-        case "collegeFullName":
-          this.validationResults.collegeFullName = "限輸入文字";
-        case "dept":
-          this.validationResults.dept = "限輸入文字";
-        case "deptFullName":
-          this.validationResults.deptFullName = "限輸入文字";
-        case "agent":
-          this.validationResults.agent = "限輸入文字";
-        case "agentExt":
-          this.validationResults.agentExt = "限輸入數字";
-        case "agentEmail":
-          this.validationResults.agentEmail = "需輸入email格式";
+      if (chineseRegex.test(event.target.value)) {
+        switch (key) {
+          case "college":
+            this.validations[key].isCorrect = true;
+            break;
+          case "collegeFullName":
+            this.validationResults.collegeFullName = "限輸入文字";
+          case "dept":
+            this.validationResults.dept = "限輸入文字";
+          case "deptFullName":
+            this.validationResults.deptFullName = "限輸入文字";
+          case "agent":
+            this.validationResults.agent = "限輸入文字";
+          case "agentExt":
+            this.validationResults.agentExt = "限輸入數字";
+          case "agentEmail":
+            this.validationResults.agentEmail = "需輸入email格式";
+        }
+      } else {
+        switch (key) {
+          case "college":
+            this.validations[key].isCorrect = false;
+            this.validations[key].text = "格式錯誤，限輸入中文";
+            break;
+          case "collegeFullName":
+            this.validationResults.collegeFullName = "限輸入文字";
+          case "dept":
+            this.validationResults.dept = "限輸入文字";
+          case "deptFullName":
+            this.validationResults.deptFullName = "限輸入文字";
+          case "agent":
+            this.validationResults.agent = "限輸入文字";
+          case "agentExt":
+            this.validationResults.agentExt = "限輸入數字";
+          case "agentEmail":
+            this.validationResults.agentEmail = "需輸入email格式";
+        }
       }
     },
     curriAgentOnChange() {
