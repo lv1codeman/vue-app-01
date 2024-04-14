@@ -8,58 +8,60 @@
           v-for="(value, key, index) in dataFields"
           :key="index"
         >
-          <template v-if="key === 'curriAgent'">
-            <!-- 顯示課務組承辦人下拉選單 -->
+          <div
+            class="md:w-1/4 flex flex-col align-items: flex-end;"
+            id="leftform"
+          >
             <label
-              class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
+              class="text-gray-700 text-sm font-bold mb-1 flex-shrink-0 md:text-right md:mb-0"
               :for="key"
             >
               <span class="mr-1">{{ value }}</span>
             </label>
-            <select
-              class="shadow border-2 border-indigo-200 focus:border-indigo-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:w-3/4"
-              :id="key"
-              v-model="selectedOption"
-              @change="curriAgentOnChange($event)"
-            >
-              <option
-                v-for="(option, index) in curriAgentOptions"
-                :key="index"
-                :value="option.value"
-              >
-                {{ option.name }}
-              </option>
-            </select>
-          </template>
-          <template v-else>
-            <label
-              class="text-gray-700 text-sm font-bold mr-2 flex-shrink-0 md:w-1/4 text-right max-[768px]:text-left"
-              :for="key"
-            >
-              <span class="mr-1">{{ value }}</span>
-            </label>
-
-            <input
-              class="shadow appearance-none border-2 border-indigo-200 focus:border-indigo-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:w-3/4"
-              :id="key"
-              type="text"
-              :placeholder="'請輸入' + value"
-              ref="inputs"
-              @input="validateInput($event, key)"
-            />
             <span
-              class="text-red-500 text-sm italic whitespace-nowrap"
+              class="text-red-500 text-sm italic mt-1"
               v-if="showValidation[key] && validationResults[key]"
-              >{{ validationResults[key] }}</span
+              >&nbsp;</span
             >
-            <div
-              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-            ></div>
-          </template>
+          </div>
+          <div class="md:w-3/4 flex flex-col" id="rightform">
+            <template v-if="key === 'curriAgent'">
+              <!-- 顯示課務組承辦人下拉選單 -->
+              <select
+                class="shadow border-2 border-indigo-200 focus:border-indigo-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                :id="key"
+                v-model="selectedOption"
+                @change="curriAgentOnChange($event)"
+              >
+                <option
+                  v-for="(option, index) in curriAgentOptions"
+                  :key="index"
+                  :value="option.value"
+                >
+                  {{ option.name }}
+                </option>
+              </select>
+            </template>
+            <template v-else>
+              <input
+                class="shadow appearance-none border-2 border-indigo-200 focus:border-indigo-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                :id="key"
+                type="text"
+                :placeholder="'請輸入' + value"
+                ref="inputs"
+                @input="validateInput($event, key)"
+              />
+              <span
+                class="text-red-500 text-sm italic mt-1 text-left"
+                v-if="showValidation[key] && validationResults[key]"
+                >{{ validationResults[key] }}</span
+              >
+            </template>
+          </div>
         </div>
 
         <!-- 以下按鈕 -->
-        <div class="flex items-center justify-around">
+        <div class="flex items-center justify-around mt-4">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
@@ -86,6 +88,19 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+/* 追加的样式 */
+#rightform {
+  margin-left: 1rem; /* 调整右侧输入框及验证信息的位置 */
+}
+.mb-1 {
+  margin-bottom: 0.25rem; /* 调整标签与输入框之间的间距 */
+}
+.mt-1 {
+  margin-top: 0.25rem; /* 调整验证信息与输入框之间的间距 */
+}
+</style>
 
 <script>
 import Swal from "sweetalert2";
